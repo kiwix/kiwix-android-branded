@@ -170,30 +170,32 @@ from the ZIM file name. If the file - specified in `zim_url` - is
 Each release is identified by a tag following this convention:
 
 ```text
-<app>.<date>          first publication of a given ZIM
-<app>.<date>.<nn>     republish of the same ZIM (nn = 1, 2, ...)
+<app>_<date>.<nn>     publication of a given ZIM (date is YYYY.MM[suffix];
+                      nn is the build number, starting at 0)
+<app>                 legacy/manual publication
 ```
 
 - `<app>` is the branded app folder name (e.g. `tunisie`, `wikimedar`)
-- `<date>` is the date suffix of the ZIM filename: `YYYY-MM`, optionally
-  followed by one or two lowercase letters when a title flavour has several
-  updates in the same month (e.g. `2026-05`, `2026-02a`, `2026-05bc`)
-- `.<nn>` is optional and only present when republishing the same ZIM
-  (for example after a failed build or a fix). It is incremented on every
-  subsequent publication.
+- `<date>` is the date suffix of the ZIM filename in tag form: `YYYY.MM`,
+  optionally followed by one or two lowercase letters when a title flavour has
+  several updates in the same month (e.g. `2026.05`, `2026.02a`, `2026.05bc`,
+  matching the ZIM filenames `2026-05`, `2026-02a`, `2026-05bc`)
+- `.<nn>` is the build number. It is `0` for the first publication of a given
+  ZIM and incremented on every subsequent attempt (for example after a failed
+  build or a fix).
 
 For example, to publish the Tunisie app:
 
 ```bash
-git tag tunisie.2026-04
-git push origin tunisie.2026-04
+git tag tunisie_2026.04.0
+git push origin tunisie_2026.04.0
 ```
 
 If that publication needs to be retried:
 
 ```bash
-git tag tunisie.2026-04.1
-git push origin tunisie.2026-04.1
+git tag tunisie_2026.04.1
+git push origin tunisie_2026.04.1
 ```
 
 Tags equal to the branded app folder name (e.g. `tunisie`) are still
@@ -202,7 +204,7 @@ accepted for backwards compatibility with older/manual releases.
 Then go to the [release
  tab](https://github.com/kiwix/kiwix-android-branded/releases) and
  click on "Draft a new release". As "tag version", use the tag you just
- created (e.g. `tunisie.2026-04` or `tunisie.2026-04.1`). Publish by adding
+ created (e.g. `tunisie_2026.04.0` or `tunisie_2026.04.1`). Publish by adding
  for example "Tunisie 2026-04" as title, no description is needed.
 
 This triggers a [Github
