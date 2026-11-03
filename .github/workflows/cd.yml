@@ -1,7 +1,7 @@
 name: CD
 
 # Publication tags follow the convention:
-#   <app>_<YYYY>.<MM>[suffix].<nn>   publication of a given ZIM
+#   <app>_<YYYY>.<MM>.<nn>   publication of a given ZIM
 #   <app>                             legacy/manual publication
 # where
 # - <app> is the branded app folder name
@@ -37,14 +37,14 @@ jobs:
         id: app
         run: |
           tag_name="${GITHUB_REF_NAME}"
-          if [[ "$tag_name" =~ ^([a-z0-9_-]+)_[0-9]{4}\.[0-9]{2}[a-z]{0,2}\.[0-9]+$ ]]; then
+          if [[ "$tag_name" =~ ^([a-z0-9_-]+)_[0-9]{4}\.[0-9]{2}\.[0-9]+$ ]]; then
             app="${BASH_REMATCH[1]}"
           else
             # Legacy/manual releases use the bare app folder name as the tag.
             app="$tag_name"
           fi
           if [[ ! "$app" =~ ^[a-z0-9_-]+$ ]]; then
-            echo "::error::Invalid release tag '$tag_name'; expected <app>_YYYY.MM[suffix].<build> or a bare app name"
+            echo "::error::Invalid release tag '$tag_name'; expected <app>_YYYY.MM.<build> or a bare app name"
             exit 1
           fi
           if [ ! -d "$app" ]; then
