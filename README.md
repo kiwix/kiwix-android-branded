@@ -170,16 +170,13 @@ from the ZIM file name. If the file - specified in `zim_url` - is
 Each release is identified by a tag following this convention:
 
 ```text
-<app>_<date>.<nn>     publication of a given ZIM (date is YYYY.MM[suffix];
+<app>_<date>.<nn>     publication of a given ZIM (date is YYYY.MM;
                       nn is the build number, starting at 0)
 <app>                 legacy/manual publication
 ```
 
 - `<app>` is the branded app folder name (e.g. `tunisie`, `wikimedar`)
 - `<date>` is the date suffix of the ZIM filename in tag form: `YYYY.MM`,
-  optionally followed by one or two lowercase letters when a title flavour has
-  several updates in the same month (e.g. `2026.05`, `2026.02a`, `2026.05bc`,
-  matching the ZIM filenames `2026-05`, `2026-02a`, `2026-05bc`)
 - `.<nn>` is the build number. It is `0` for the first publication of a given
   ZIM and incremented on every subsequent attempt (for example after a failed
   build or a fix).
